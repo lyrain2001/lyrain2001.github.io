@@ -138,11 +138,71 @@
       margin-bottom: 10px;
       line-height: 1.6;
     }
+
+    /* Misc: favorite anime list + poster wall */
+    .acg-wrap {
+      display: flex;
+      align-items: flex-start;
+      gap: 40px;
+      padding: 0 0 20px;
+    }
+
+    .acg-list {
+      flex: 0 0 auto;
+      font-size: 14px;
+      line-height: 2;
+    }
+
+    .acg-list ul {
+      margin: 0;
+      padding: 0;
+      list-style: none;
+    }
+
+    /* Poster wall: a 15-column grid of square cells with one even gap.
+       Each image spans a block close to its own shape; the cluster has no
+       holes inside but a staggered outline. */
+    .acg-wall {
+      --g: 12px;
+      flex: 0 1 auto;
+      width: 100%;
+      max-width: 460px;
+      min-width: 0;
+      margin-top: 8px;
+      container-type: inline-size;
+    }
+
+    .acg-grid {
+      display: grid;
+      grid-template-columns: repeat(15, 1fr);
+      grid-auto-rows: calc((100cqw - 14 * var(--g)) / 15);
+      gap: var(--g);
+    }
+
+    .acg-grid img {
+      display: block;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      border-radius: 2px;
+    }
+
+    @media (max-width: 576px) {
+      .acg-wrap {
+        flex-direction: column;
+        align-items: stretch;
+      }
+
+      .acg-wall {
+        --g: 8px;
+      }
+    }
   </style>
 
   <title>Yurong Liu</title>
   <meta http-equiv="Content-Type" content="text/html; charset=us-ascii">
   <link href='https://fonts.googleapis.com/css?family=Lato:400,700,400italic,700italic' rel='stylesheet' type='text/css'>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css" rel="stylesheet">
   <link rel="icon" type="image/png" href="images/jirachi.jpg">
 
   <!-- Bootstrap JS -->
@@ -194,10 +254,9 @@
           and Prof. <a href="https://www.cs.rochester.edu/~stefanko/">Daniel Štefankovič</a>.
         </p>
         <p>
-          I am broadly interested in data management,
-          particularly <em>applying large language models to data discovery and integration tasks</em>,
-          with emphasis on post-training methods and agentic frameworks.
-          <!-- My research also involves table representation learning and explainable AI. -->
+          My research focuses on <em>making data usable for data agents</em>.
+          I post-train language models for data management and preparation tasks
+          and design catalogs that help agents find, combine, and trust data.
         </p>
         <!-- <p>
           Previously, I jointly pursued an Honors B.S. in Computer Science and an Honors B.A. in Mathematics at the University of Rochester in 2023,
@@ -210,14 +269,14 @@
 
     <!-- Publications -->
     <div class="sec-wrapper" id="publications">
-      <div class="section-title">Publications <span style="font-size:14px;font-weight:normal">(* = equal contribution)</span></div>
+      <div class="section-title">Selected Publications <span style="font-size:14px;font-weight:normal">(* = equal contribution)</span></div>
 
-      <div class="pub-item">
+      <!-- <div class="pub-item">
         <span class="pub-title">AgentTrails: Towards Trust and Reuse for Agentic Tasks</span><br>
         Eden Wu, Sonia Castelo, <strong>Yurong Liu</strong>, Cláudio T. Silva, Juliana Freire<br>
         <em>VLDB 2026 (DASHSys Workshop)</em>
         &ensp; <a href="https://arxiv.org/abs/2607.18816">[paper]</a>
-      </div>
+      </div> -->
       
       <div class="pub-item">
         <span class="pub-title">Auto-Fill: Learning to Predict Missing Values Accurately with Specialist Language Models</span><br>
@@ -227,22 +286,22 @@
         <a href="https://github.com/lyrain2001/auto-fill">[code]</a>
       </div>
       
-      <div class="pub-item">
+      <!-- <div class="pub-item">
         <span class="pub-title">LakeQA: A Benchmark for Complex Exploratory QA over a Million-Scale Data Lake</span><br>
         Haonan Wang*, Jiaxiang Liu*, <strong>Yurong Liu</strong>, Austin Senna Wijaya, Tianle Zhou, Eden Wu, Yijia Chen, Wanting You, Reya Vir, Daniela Pinto Veizaga, Grace Fan, Yusen Zhang, Juliana Freire, Eugene Wu<br>
         <em>ICML 2026</em>
         &ensp; <a href="https://arxiv.org/abs/2606.10460v1">[paper]</a>
         <a href="https://github.com/lakeagent/datalake-qa">[code]</a>
         <a href="https://lakeqa-bench.github.io/">[homepage]</a>
-      </div>
+      </div> -->
 
-      <div class="pub-item">
+      <!-- <div class="pub-item">
         <span class="pub-title">BDI-Kit Demo: A Toolkit for Programmable and Conversational Data Harmonization</span><br>
         Roque Lopez, <strong>Yurong Liu</strong>, Christos Koutras, Juliana Freire<br>
         <em>SIGMOD 2026 (Demo)</em>
         &ensp; <a href="https://arxiv.org/abs/2604.06405">[paper]</a>
         <a href="https://github.com/VIDA-NYU/bdi-kit">[code]</a>
-      </div>
+      </div> -->
 
       <div class="pub-item">
         <span class="pub-title">AutoDDG: Automated Dataset Description Generation using Large Language Models</span><br>
@@ -274,19 +333,19 @@
         &ensp; <a href="https://arxiv.org/abs/2412.08194">[paper]</a> <a href="https://github.com/VIDA-NYU/magneto-matcher">[code]</a>
       </div>
 
-      <div class="pub-item">
+      <!-- <div class="pub-item">
         <span class="pub-title">Large Language Models for Data Discovery and Integration: Challenges and Opportunities</span><br>
         Juliana Freire, Grace Fan, Benjamin Feuer, Christos Koutras, <strong>Yurong Liu</strong>, Eduardo Pena, Aécio Santos, Cláudio Silva, Eden Wu<br>
         <em>IEEE Data Engineering Bulletin 2025</em>
         &ensp; <a href="http://sites.computer.org/debull/A25mar/p3.pdf">[paper]</a>
-      </div>
+      </div> -->
 
-      <div class="pub-item">
+      <!-- <div class="pub-item">
         <span class="pub-title">Enhancing Biomedical Schema Matching with LLM-based Training Data Generation</span><br>
         <strong>Yurong Liu</strong>, Aécio Santos, Eduardo H. M. Pena, Roque Lopez, Eden Wu, Juliana Freire<br>
         <em>NeurIPS 2024 (Table Representation Learning Workshop)</em>
         &ensp; <a href="https://openreview.net/forum?id=RMZVUP7NgL#discussion">[paper]</a>
-      </div>
+      </div> -->
 
       <div class="pub-item">
         <span class="pub-title">ArcheType: A Novel Framework for Open-Source Column Type Annotation using Large Language Models</span><br>
@@ -295,12 +354,12 @@
         &ensp; <a href="https://dl.acm.org/doi/pdf/10.14778/3665844.3665857?casa_token=7X4ysr9D57EAAAAA:n2vs-JPcPNQxGxYfYL-WhF0w6qFAH_JAn6ICzkJZ-SZeT10x63JSZbuWZGsQw2gG60rzMtpRWdfr">[paper]</a> <a href="https://github.com/penfever/ArcheType">[code]</a>
       </div>
 
-      <div class="pub-item">
+      <!-- <div class="pub-item">
         <span class="pub-title">Sampling over Union of Joins</span><br>
         <strong>Yurong Liu</strong>*, Yunlong Xu*, Fatemah Nargesian<br>
         <em>SIGMOD 2023 (SRC)</em>
         &ensp; <a href="https://arxiv.org/abs/2303.00940">[paper]</a>
-      </div>
+      </div> -->
     </div>
 
     <!-- Experience -->
@@ -310,8 +369,7 @@
       <div class="exp-item">
         <a href="https://research.google/"><strong>Google Research</strong></a><br>
         Student Researcher, Sep 2026 - Present<br>
-        Host: Tarfah Alrashed, Shiyu Chen, <a href="https://datasetsearch.research.google.com/">Dataset Search Team</a><br>
-        <!-- Worked on dataset search and game-theoretic explainable AI. -->
+        Hosts: Tarfah Alrashed, Shiyu Chen, <a href="https://datasetsearch.research.google.com/">Dataset Search Team</a><br>
       </div>
 
       <div class="exp-item">
@@ -338,8 +396,37 @@
     <!-- Misc -->
     <div class="sec-wrapper" id="misc">
       <div class="section-title">Misc</div>
-      <p>Outside of research, I am an amateur basketball player 🏀 and ACG lover.
-        My favorite anime are <em>One Piece</em>, <em>Gintama</em>, and <em>Cowboy Bebop</em>. Recently, I've also really enjoyed <em>Vinland Saga: Season 1</em>.</p>
+      <p>Outside of research, I am an amateur basketball player 🏀 and
+        <a data-bs-toggle="collapse" href="#acg-list" role="button" aria-expanded="false" aria-controls="acg-list" title="My favorite anime">ACG lover<sup><i class="bi bi-info" style="margin: 0 -.3em 0 -.2em;"></i></sup></a>.</p>
+        <!-- My favorite anime are <em>One Piece</em>, <em>Gintama</em>, and <em>Cowboy Bebop</em>. Recently, I've also really enjoyed <em>Vinland Saga: Season 1</em>.</p> -->
+      <div class="collapse" id="acg-list">
+        <div class="acg-wrap">
+        <div class="acg-list">
+        <strong>Fav anime:</strong>
+        <ul>
+          <li><em>One Piece</em></li>
+          <li><em>Cowboy Bebop</em></li>
+          <li><em>Gintama</em></li>
+          <li><em>Attack on Titan</em></li>
+          <li><em>Vinland Saga</em></li>
+          <li><em>Samurai Champloo</em></li>
+          <li><em>No Game No Life</em></li>
+          <li><em>Dragon Ball</em></li>
+          <li><em>Gosick</em></li>
+          <!-- <li><em>Brush Up Life</em> (J-drama)</li> -->
+        </ul>
+        </div>
+        <div class="acg-wall">
+          <div class="acg-grid">
+            <!-- grid-area: row / column / span rows / span columns -->
+            <img style="grid-area: 2 / 1 / span 6 / span 4;"  src="images/anime/levi.jpg" alt="Attack on Titan" loading="lazy">
+            <img style="grid-area: 1 / 5 / span 5 / span 6;"  src="images/anime/one-piece-manga.jpg" alt="One Piece" loading="lazy">
+            <img style="grid-area: 3 / 11 / span 5 / span 5;" src="images/anime/gintama-manga.jpg" alt="Gintama" loading="lazy">
+            <img style="grid-area: 6 / 5 / span 4 / span 6;"  src="images/anime/cowboy-bebop-poster.jpg" alt="Cowboy Bebop" loading="lazy">
+          </div>
+        </div>
+        </div>
+      </div>
     </div>
 
     <!-- Footer -->
